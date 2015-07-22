@@ -17,6 +17,7 @@ AWS credentials as required by aws-sdk module (e.g. ~/.aws/credentials)
                 'memCacheLifetime' : 3600 * 1000,      # Lifespan in ms for the memory cache entries
                 'dbCacheLifetime' : 24 * 3600 * 1000,  # Lifespan in ms for the db cache entries
                 });
+                
     cache.getDoc('myObjType', 'myObjId', function(err,data) {
         if (err) {
             ...
@@ -39,6 +40,8 @@ AWS credentials as required by aws-sdk module (e.g. ~/.aws/credentials)
 ## Release History
 
 * 2015/07/21 - v0.0.1 - Initial version of module
+* 2015/07/22 - v0.0.2 - BUGFIX: old references to promise style callbacks removed
+* 2015/07/22 - v0.0.3 - BUGFIX: old references to promise style callbacks removed
 
 
 ## License
