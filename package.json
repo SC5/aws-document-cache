@@ -1,6 +1,6 @@
 {
   "name": "aws-document-cache",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generic document cache based on Amazon DynamoDB",
   "main": "index.js",
   "scripts": {
