@@ -12,6 +12,15 @@
     "document",
     "dynamodb"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SC5/aws-document-cache.git"
+  },
+  "readme": "README.md",
   "author": "Mikael Puittinen (mikael.puittinen@sc5.io)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1.39",
+    "dynamodb-doc": "^1.0.0"
+  }
 }
