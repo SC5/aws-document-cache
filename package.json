@@ -1,7 +1,7 @@
 {
   "name": "aws-document-cache",
-  "version": "0.0.1",
-  "description": "Generic document cache based on DynamoDB",
+  "version": "0.0.2",
+  "description": "Generic document cache based on Amazon DynamoDB",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
