@@ -94,7 +94,7 @@ function setDoc(type, identifier,data, callback) {
                 'TableName' : cacheTable};
     dynamoDB.putItem(dbdoc, function(err, data) {
         if (err) {
-            return errorCb("Cache error: " + err); 
+            return callback("Cache error: " + err, null); 
         }
         memcache[data.cacheKey] = data;
 
