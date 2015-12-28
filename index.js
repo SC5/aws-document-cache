@@ -1,21 +1,23 @@
 //
-// Object caching using DynamoDB
+// Object caching (currently using DynamoDB)
 //
 
 var AWS = require('aws-sdk');
-var DOC = require('dynamodb-doc');
 
 var dynamoDB = null;
 var cacheTable = null;
 var memCacheLifetime = 3600 * 1000; // memcache = 1h
-var dbCacheLifetime = 24*3600 * 1000; // dbcache = 24h;
+var dbCacheLifetime = 24 * 3600 * 1000; // dbcache = 24h;
 var memcache = {};
 var config = {};
 
 function init(params) {
     config = params;
-    var awsConfig = {};
-    if (config.awsRegion != null) {
+    var awsConfig = {
+        region: config.awsRegion
+    };
+
+    if (awsConfig.region == null) {
         awsConfig.region = 'eu-west-1';
     }
     if (config.cacheTable != null) {
@@ -27,8 +29,9 @@ function init(params) {
     if (config.dbCacheLifetime != null) {
         dbCacheLifetime = config.dbCacheLifetime;
     }
-    var awsClient = new AWS.DynamoDB(awsConfig);
-    dynamoDB = new DOC.DynamoDB(awsClient);
+    AWS.config.update(awsConfig);
+    
+    dynamoDB = new AWS.DynamoDB.DocumentClient();
 }
 
 function getCacheKey(type, identifier) {
@@ -60,7 +63,7 @@ function getDoc(type, identifier, callback) {
         TableName: cacheTable
     };
 
-    dynamoDB.getItem(params, function(err, data) {
+    dynamoDB.get(params, function(err, data) {
         if (err) {
             return callback("Cache error " + err, null);
         } else {
@@ -92,7 +95,7 @@ function setDoc(type, identifier,data, callback) {
     data.cacheKey = getCacheKey(type, identifier);
     var dbdoc = {'Item' : data,
                 'TableName' : cacheTable};
-    dynamoDB.putItem(dbdoc, function(err, data) {
+    dynamoDB.put(dbdoc, function(err, data) {
         if (err) {
             return callback("Cache error: " + err, null); 
         }
