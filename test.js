@@ -9,14 +9,15 @@ describe('aws-document-cache', function() {
     
     it('Has function init()', function(done) {
         docCache.init({
-           cacheTable: cacheTable
+           cacheServer: ['127.0.0.1:11211']
         });
         return done();
     })
     
     it('setDoc() stores an item to the cache', function(done) {
+        this.timeout(5000);
         docCache.setDoc('test', 'testCode', {
-            meta: doc
+            data: doc
         }, function(err, result) {
            expect(err).toEqual(null);
            done(); 
@@ -25,16 +26,22 @@ describe('aws-document-cache', function() {
     
     it('getDoc() reads an item from the cache', function(done) {
         docCache.getDoc('test', 'testCode', function(err, result) {
-           expect(result.meta.rand).toEqual(doc.rand);
-           console.log(result);
+           expect('object').toEqual(typeof(result));
+           expect(result).toNotEqual(null);
+           if (result) {
+                expect(result.data.rand).toEqual(doc.rand);
+           }
            done(); 
         });     
     });
    
     it('getDoc() reads an item from the cache', function(done) {
         docCache.getDoc('test', 'testCode', function(err, result) {
-            console.log(result);
-           expect(result.meta.rand).toEqual(doc.rand);
+           expect('object').toEqual(typeof(result));
+           expect(result).toNotEqual(null);
+           if (result) {
+                expect(result.data.rand).toEqual(doc.rand);
+           }
            done(); 
         });     
     });
