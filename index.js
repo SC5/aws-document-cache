@@ -24,7 +24,7 @@ function init(params) {
         cacheTable = config.cacheTable;
     }
     if (config.memCacheLifetime != null) {
-        memCacheLifeTime = config.memCacheLifetime;
+        memCacheLifetime = config.memCacheLifetime;
     }
     if (config.dbCacheLifetime != null) {
         dbCacheLifetime = config.dbCacheLifetime;

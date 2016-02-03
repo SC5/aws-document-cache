@@ -26,14 +26,12 @@ describe('aws-document-cache', function() {
     it('getDoc() reads an item from the cache', function(done) {
         docCache.getDoc('test', 'testCode', function(err, result) {
            expect(result.meta.rand).toEqual(doc.rand);
-           console.log(result);
            done(); 
         });     
     });
    
     it('getDoc() reads an item from the cache', function(done) {
         docCache.getDoc('test', 'testCode', function(err, result) {
-            console.log(result);
            expect(result.meta.rand).toEqual(doc.rand);
            done(); 
         });     
